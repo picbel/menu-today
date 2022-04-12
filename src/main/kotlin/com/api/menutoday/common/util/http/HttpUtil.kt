@@ -1,13 +1,10 @@
 package com.api.menutoday.common.util.http
 
+import com.api.menutoday.common.util.http.model.HttpRequest
+import com.api.menutoday.common.util.http.model.HttpResponse
+
 interface HttpUtil{
 
-    fun post() : HttpResponse
-
-    fun put() : HttpResponse
-
-    fun get() : HttpResponse
-
-    fun delete() : HttpResponse
+    fun get(request : HttpRequest): HttpResponse
 
 }

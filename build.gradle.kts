@@ -25,9 +25,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    // 나중에 fegin client나 webclient로 바꿔 볼까...?
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
-
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
