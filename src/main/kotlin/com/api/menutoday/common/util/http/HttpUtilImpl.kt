@@ -20,9 +20,9 @@ internal class HttpUtilImpl(
 ) : HttpUtil{
 
     override fun get(request : HttpRequest): HttpResponse {
-        val con : HttpURLConnection = connect(request.url);
+        val con : HttpURLConnection = connect(request.urlAssemble());
         try {
-            con.requestMethod = "GET";
+            con.requestMethod = "GET"
             return call(con,request)
         } catch (e : IOException) {
             throw RuntimeException("API 요청과 응답 실패", e);
@@ -73,9 +73,9 @@ internal class HttpUtilImpl(
             val url = URL(apiUrl);
             return url.openConnection() as HttpURLConnection
         } catch (e : MalformedURLException) {
-            throw RuntimeException("API URL이 잘못되었습니다. : $apiUrl", e);
+            throw RuntimeException("API URL이 잘못되었습니다. : $apiUrl", e)
         } catch (e : IOException) {
-            throw RuntimeException("연결이 실패했습니다. : $apiUrl", e);
+            throw RuntimeException("연결이 실패했습니다. : $apiUrl", e)
         }
     }
 
@@ -83,13 +83,13 @@ internal class HttpUtilImpl(
         val streamReader = InputStreamReader(body, StandardCharsets.UTF_8);
         try  {
             val lineReader =  BufferedReader(streamReader)
-            val responseBody = StringBuilder();
+            val responseBody = StringBuilder()
             lineReader.forEachLine {
                 responseBody.append(it)
             }
-            return responseBody.toString();
+            return responseBody.toString()
         } catch (e : IOException) {
-            throw RuntimeException("API 응답을 읽는데 실패했습니다.", e);
+            throw RuntimeException("API 응답을 읽는데 실패했습니다.", e)
         }
     }
 }
