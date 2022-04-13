@@ -29,4 +29,29 @@ class KaKaoApiTest {
 
     }
 
+    @Test
+    fun apiCallCate(){
+        var keyword : String = "식당"
+
+        val request = HttpRequest(
+            url = "https://dapi.kakao.com/v2/local/search/category.json"
+        )
+            .addHeader("Authorization","KakaoAK ")
+            .addParam("y",37.514322572335935)
+            .addParam("x",127.06283102249932)
+            .addParam("radius",1000)
+            .addParam("category_group_code","FD6")
+//            .addParam("query", keyword, Charsets.UTF_8)
+
+
+
+        val http = HttpUtilImpl(ObjectMapper())
+        val response = http.get(request)
+
+
+        println("카카오에서 받은 결과 = " + response);
+        System.out.println("-----------------------------------------");
+
+    }
+
 }
