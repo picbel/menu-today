@@ -20,7 +20,7 @@ class KaKaoApiTest {
         val request = HttpRequest(
             url = "https://dapi.kakao.com/v2/local/search/keyword.json?y=37.514322572335935&x=127.06283102249932&radius=20000&query=$keyword"
         )
-            .addHeader("Authorization","KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
+            .addHeader("Authorization","KakaoAK ")
 
 
         val http = HttpUtilImpl(ObjectMapper())
