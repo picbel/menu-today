@@ -9,7 +9,7 @@ class HttpRequest(
     val url : String,
     val requestHeaders : MutableMap<String,String> = HashMap(),
     private val queryParameters : MutableMap<String,Any> = HashMap()
-//    val body : String 추후 바디 열리면 그때 여는걸로
+//    val body : String 추후 바디필요하면 그때 여는걸로
     ) {
 
     fun addHeader(key : String, value : String): HttpRequest {

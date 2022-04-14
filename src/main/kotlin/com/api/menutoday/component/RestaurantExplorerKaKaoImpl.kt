@@ -16,7 +16,7 @@ class RestaurantExplorerKaKaoImpl(
         return "https://openapi.naver.com/v1/search/local.json?query=$keyWord&display=10&start=1&sort=random"
     }
 
-    override fun search(
+    override fun searchKeyword(
         keyWord : String,
         address : String
     ): List<Restaurant> {
