@@ -56,7 +56,7 @@ class ApiCall {
         val request = HttpRequest(
             url = "https://dapi.kakao.com/v2/local/search/address.json"
         )
-            .addHeader("Authorization","KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
+            .addHeader("Authorization","KakaoAK ")
             .addParam("query", address, Charsets.UTF_8)
 
 
@@ -74,7 +74,7 @@ class ApiCall {
         val request = HttpRequest(
             url = "https://dapi.kakao.com/v2/local/search/keyword.json"
         )
-            .addHeader("Authorization","KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
+            .addHeader("Authorization","KakaoAK ")
             .addParam("y",37.5231498089109)
             .addParam("x",127.026612890604)
             .addParam("radius",500)
@@ -95,7 +95,7 @@ class ApiCall {
         val request = HttpRequest(
             url = "https://dapi.kakao.com/v2/local/search/category.json"
         )
-            .addHeader("Authorization","KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
+            .addHeader("Authorization","KakaoAK ")
             .addParam("y",37.514322572335935)
             .addParam("x",127.06283102249932)
             .addParam("radius",1000)
