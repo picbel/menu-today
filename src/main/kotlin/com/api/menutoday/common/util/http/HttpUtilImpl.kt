@@ -16,7 +16,6 @@ import java.nio.charset.StandardCharsets
 
 @Service
 internal class HttpUtilImpl(
-    private val objectMapper: ObjectMapper
 ) : HttpUtil{
 
     override fun get(request : HttpRequest): HttpResponse {
@@ -49,7 +48,6 @@ internal class HttpUtilImpl(
         setHeader(con, request)
         if (con.responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
             return HttpResponse(
-                objectMapper = objectMapper,
                 method = HttpMethod.valueOf(con.requestMethod),
                 code = con.responseCode,
                 message = con.responseMessage,
@@ -58,7 +56,6 @@ internal class HttpUtilImpl(
             )
         } else { // 에러 발생
             return HttpResponse(
-                objectMapper = objectMapper,
                 method = HttpMethod.valueOf(con.requestMethod),
                 code = con.responseCode,
                 message = con.responseMessage,
