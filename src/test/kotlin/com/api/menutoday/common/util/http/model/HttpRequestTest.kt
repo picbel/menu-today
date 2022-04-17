@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach
 
 class HttpRequestTest {
 
-    lateinit var sut : HttpRequest
+    private lateinit var sut : HttpRequest
 
     @BeforeEach
     fun setUp(){

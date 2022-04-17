@@ -8,42 +8,77 @@ import com.api.menutoday.domain.explorer.restaurant.model.Restaurant
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 
+/*
+    사용한 API
+    https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword
+    https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category
+
+ */
 @Service
 class RestaurantExplorerKaKaoImpl(
     private val httpclient: HttpUtil,
     private val objectMapper: ObjectMapper
 ) : RestaurantExplorer {
 
-    /*
-    https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword
-    https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category
-     */
-    private fun urlAssemble(keyWord : String) : String{
-        return "https://openapi.naver.com/v1/search/local.json?query=$keyWord&display=10&start=1&sort=random"
+    override fun searchRestaurant(
+        address: Address
+    ): List<Restaurant> {
+        return getRestaurant(address)
     }
 
-    override fun searchKeyword(
-        keyWord : String,
+    override fun recommendRestaurant(
         address : Address
     ): List<Restaurant> {
-        var keyword : String = "치킨"
+        return randomPickFive(getRestaurant(address))
+    }
 
-        val request = HttpRequest(
-            url = "https://dapi.kakao.com/v2/local/search/keyword.json"
-        )
-            .addHeader("Authorization","KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
-            .addParam("y",37.5231498089109)
-            .addParam("x",127.026612890604)
-            .addParam("radius",500)
-            .addParam("category_group_code","FD6")
-            .addParam("query", keyword, Charsets.UTF_8)
+    override fun recommendRestaurant(
+        address: Address,
+        menu: String
+    ): List<Restaurant> {
+        return randomPickFive(getRestaurantByMenu(address, menu))
+    }
 
+    override fun randomRestaurant(
+        address: Address
+    ): Restaurant {
+        return randomPickOne(getRestaurant(address))
+    }
+
+    override fun randomRestaurant(
+        address: Address,
+        menu: String)
+    : Restaurant {
+        return randomPickOne(getRestaurantByMenu(address, menu))
+    }
+
+    private fun kakaoSearchRequest(address: Address, url : String): HttpRequest {
+        return HttpRequest(url = url)
+            .addHeader("Authorization", "KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
+            .addParam("x", address.x)
+            .addParam("y", address.y)
+            .addParam("radius", 500)
+            .addParam("category_group_code", "FD6")
+    }
+
+    private fun getRestaurant(address: Address): List<Restaurant> {
+        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/keyword.json")
 
         val response = httpclient.get(request)
 
-        val bodyMap = objectMapper.bodyMap<KakaoResponse>(response.body)
+        return objectMapper.bodyMap<KakaoResponse>(response.body).documents
+    }
 
-        TODO("Not yet implemented")
+    private fun getRestaurantByMenu(
+        address: Address,
+        menu: String
+    ): List<Restaurant> {
+        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/category.json")
+            .addParam("query", menu, Charsets.UTF_8)
+
+        val response = httpclient.get(request)
+
+        return objectMapper.bodyMap<KakaoResponse>(response.body).documents
     }
 
     internal data class KakaoResponse(
