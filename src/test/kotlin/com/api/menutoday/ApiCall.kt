@@ -89,7 +89,7 @@ class ApiCall {
             .addHeader("Authorization","KakaoAK ")
             .addParam("y",37.514322572335935)
             .addParam("x",127.06283102249932)
-            .addParam("radius",1000)
+            .addParam("radius",500)
             .addParam("category_group_code","FD6")
 //            .addParam("query", keyword, Charsets.UTF_8)
 

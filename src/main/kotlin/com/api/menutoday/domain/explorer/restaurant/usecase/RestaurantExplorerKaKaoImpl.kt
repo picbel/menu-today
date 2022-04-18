@@ -47,8 +47,8 @@ class RestaurantExplorerKaKaoImpl(
 
     override fun randomRestaurant(
         address: Address,
-        menu: String)
-    : Restaurant {
+        menu: String
+    ): Restaurant {
         return randomPickOne(getRestaurantByMenu(address, menu))
     }
 
@@ -62,7 +62,7 @@ class RestaurantExplorerKaKaoImpl(
     }
 
     private fun getRestaurant(address: Address): List<Restaurant> {
-        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/keyword.json")
+        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/category.json")
 
         val response = httpclient.get(request)
 
@@ -73,7 +73,7 @@ class RestaurantExplorerKaKaoImpl(
         address: Address,
         menu: String
     ): List<Restaurant> {
-        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/category.json")
+        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/keyword.json")
             .addParam("query", menu, Charsets.UTF_8)
 
         val response = httpclient.get(request)
