@@ -17,7 +17,7 @@ class RestaurantExplorerKaKaoImplTest{
 
     private lateinit var sut : RestaurantExplorerKaKaoImpl
 
-    val categoryCode = "FD6"
+    private val categoryCode = "FD6"
 
     @BeforeEach
     fun setUp(httpUtil : HttpUtil){

@@ -7,12 +7,12 @@ import com.api.menutoday.domain.explorer.restaurant.model.Address
 import com.api.menutoday.domain.explorer.restaurant.model.Restaurant
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
+import java.util.stream.IntStream
 
 /*
     사용한 API
     https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword
     https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category
-
  */
 @Service
 class RestaurantExplorerKaKaoImpl(
@@ -61,12 +61,35 @@ class RestaurantExplorerKaKaoImpl(
             .addParam("category_group_code", "FD6")
     }
 
+    private fun callApiToTheEnd(
+        body: KakaoResponse,
+        request: HttpRequest
+    ): MutableList<Restaurant> {
+        val restaurants = body.documents.toMutableList()
+
+        restaurants.addAll(IntStream.range(2, body.meta.pageableCount)
+            .mapToObj {
+                objectMapper.bodyMap<KakaoResponse>(
+                    httpclient.get(
+                        request.copy().addParam("page", it)
+                    ).body
+                ).documents
+            }
+            .toList()
+            .flatten()
+            .toMutableList()
+        )
+
+        return restaurants
+    }
+
     private fun getRestaurant(address: Address): List<Restaurant> {
         val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/category.json")
 
         val response = httpclient.get(request)
+        val body = objectMapper.bodyMap<KakaoResponse>(response.body)
 
-        return objectMapper.bodyMap<KakaoResponse>(response.body).documents
+        return if (body.meta.isEnd) body.documents else callApiToTheEnd(body, request)
     }
 
     private fun getRestaurantByMenu(
@@ -77,8 +100,9 @@ class RestaurantExplorerKaKaoImpl(
             .addParam("query", menu, Charsets.UTF_8)
 
         val response = httpclient.get(request)
+        val body = objectMapper.bodyMap<KakaoResponse>(response.body)
 
-        return objectMapper.bodyMap<KakaoResponse>(response.body).documents
+        return if (body.meta.isEnd) body.documents else callApiToTheEnd(body, request)
     }
 
     internal data class KakaoResponse(

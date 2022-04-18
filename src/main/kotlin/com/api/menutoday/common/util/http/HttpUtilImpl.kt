@@ -2,7 +2,6 @@ package com.api.menutoday.common.util.http
 
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import java.io.BufferedReader
@@ -14,6 +13,7 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.nio.charset.StandardCharsets
 
+// 동시에 여러곳에서 주입받아 사용하는데 문제가 없을려나...? 이거 물어보자
 @Service
 internal class HttpUtilImpl(
 ) : HttpUtil{

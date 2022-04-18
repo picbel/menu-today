@@ -48,5 +48,6 @@ class HttpRequest(
         return "HttpRequest(url=${urlAssemble()}, requestHeaders=$requestHeaders)"
     }
 
+    fun copy() : HttpRequest = HttpRequest(url, requestHeaders, queryParameters)
 
 }
