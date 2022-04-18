@@ -6,10 +6,11 @@ import com.api.menutoday.config.ObjectMapperConfig
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 
-//@Disabled
+@Disabled
 // 외부api의 데이터를 확인할려고 하는 것이니 실제 테스트와 관련 없습니다.
 class ApiCall {
 
