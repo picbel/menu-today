@@ -3,8 +3,8 @@ package com.api.menutoday.domain.explorer.restaurant.usecase
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.explorer.restaurant.fixture.HttpUtilImplWithRestaurantResolver
-import com.api.menutoday.domain.explorer.restaurant.model.Address
-import com.api.menutoday.domain.explorer.restaurant.model.Restaurant
+import com.api.menutoday.domain.explorer.restaurant.aggregate.Address
+import com.api.menutoday.domain.explorer.restaurant.aggregate.Restaurant
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.BeforeEach

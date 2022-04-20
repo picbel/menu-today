@@ -3,8 +3,8 @@ package com.api.menutoday.domain.explorer.restaurant.usecase
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse.Companion.bodyMap
-import com.api.menutoday.domain.explorer.restaurant.model.Address
-import com.api.menutoday.domain.explorer.restaurant.model.Restaurant
+import com.api.menutoday.domain.explorer.restaurant.aggregate.Address
+import com.api.menutoday.domain.explorer.restaurant.aggregate.Restaurant
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 import java.util.stream.IntStream

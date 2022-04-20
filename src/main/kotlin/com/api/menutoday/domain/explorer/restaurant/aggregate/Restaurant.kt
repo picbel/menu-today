@@ -1,4 +1,4 @@
-package com.api.menutoday.domain.explorer.restaurant.model
+package com.api.menutoday.domain.explorer.restaurant.aggregate
 
 /*
     {

@@ -1,7 +1,7 @@
 package com.api.menutoday.domain.explorer.restaurant.usecase
 
-import com.api.menutoday.domain.explorer.restaurant.model.Address
-import com.api.menutoday.domain.explorer.restaurant.model.Restaurant
+import com.api.menutoday.domain.explorer.restaurant.aggregate.Address
+import com.api.menutoday.domain.explorer.restaurant.aggregate.Restaurant
 
 interface RestaurantExplorer {
     fun searchRestaurant(
