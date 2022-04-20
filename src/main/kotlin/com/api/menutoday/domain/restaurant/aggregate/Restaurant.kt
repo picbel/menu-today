@@ -1,5 +1,7 @@
 package com.api.menutoday.domain.restaurant.aggregate
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 /*
     {
     "address_name":"서울 강남구 신사동 646-8",
@@ -21,7 +23,8 @@ open class Restaurant(
     open val categoryGroupName: String,
     open val categoryName: String,
     open val distance: String, // 좌표로부터의 거리
-    open val id: String,
+    @JsonProperty("id")
+    open val apiId: String,
     open val phone: String,
     open val placeName: String,
     open val placeUrl: String,
@@ -30,6 +33,6 @@ open class Restaurant(
     open val y: String
 ){
     override fun toString(): String {
-        return "Restaurant(addressName='$addressName', categoryGroupCode='$categoryGroupCode', categoryGroupName='$categoryGroupName', categoryName='$categoryName', distance='$distance', id='$id', phone='$phone', placeName='$placeName', placeUrl='$placeUrl', roadAddressName='$roadAddressName', x='$x', y='$y')"
+        return "Restaurant(addressName='$addressName', categoryGroupCode='$categoryGroupCode', categoryGroupName='$categoryGroupName', categoryName='$categoryName', distance='$distance', id='$apiId', phone='$phone', placeName='$placeName', placeUrl='$placeUrl', roadAddressName='$roadAddressName', x='$x', y='$y')"
     }
 }
