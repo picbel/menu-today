@@ -4,7 +4,7 @@ import com.api.menutoday.common.util.http.HttpUtilImpl
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse.Companion.bodyMap
 import com.api.menutoday.config.ObjectMapperConfig
-import com.api.menutoday.domain.restaurant.usecase.RestaurantFinderUseCaseKaKaoImpl
+import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat

@@ -1,6 +1,6 @@
 package com.api.menutoday.endpoint.restaurant
 
-import com.api.menutoday.domain.restaurant.usecase.RestaurantFinderUseCase
+import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCase
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 

@@ -1,4 +1,4 @@
-package com.api.menutoday.domain.restaurant.usecase
+package com.api.menutoday.domain.restaurant.usecase.finder
 
 import com.api.menutoday.domain.restaurant.aggregate.Address
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant

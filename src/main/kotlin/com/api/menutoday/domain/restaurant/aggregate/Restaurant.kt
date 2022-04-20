@@ -15,19 +15,19 @@ package com.api.menutoday.domain.restaurant.aggregate
     "y":"37.52560341079871"
     }
 */
-class Restaurant(
-    val addressName: String,
-    val categoryGroupCode: String,
-    val categoryGroupName: String,
-    val categoryName: String,
-    val distance: String, // 좌표로부터의 거리
-    val id: String,
-    val phone: String,
-    val placeName: String,
-    val placeUrl: String,
-    val roadAddressName: String,
-    val x: String,
-    val y: String
+open class Restaurant(
+    open val addressName: String,
+    open val categoryGroupCode: String,
+    open val categoryGroupName: String,
+    open val categoryName: String,
+    open val distance: String, // 좌표로부터의 거리
+    open val id: String,
+    open val phone: String,
+    open val placeName: String,
+    open val placeUrl: String,
+    open val roadAddressName: String,
+    open val x: String,
+    open val y: String
 ){
     override fun toString(): String {
         return "Restaurant(addressName='$addressName', categoryGroupCode='$categoryGroupCode', categoryGroupName='$categoryGroupName', categoryName='$categoryName', distance='$distance', id='$id', phone='$phone', placeName='$placeName', placeUrl='$placeUrl', roadAddressName='$roadAddressName', x='$x', y='$y')"

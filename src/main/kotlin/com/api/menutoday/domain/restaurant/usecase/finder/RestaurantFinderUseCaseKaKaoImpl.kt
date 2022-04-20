@@ -1,4 +1,4 @@
-package com.api.menutoday.domain.restaurant.usecase
+package com.api.menutoday.domain.restaurant.usecase.finder
 
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.common.util.http.model.HttpRequest
