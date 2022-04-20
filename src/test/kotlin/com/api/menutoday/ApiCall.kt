@@ -13,13 +13,12 @@ import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 import java.util.stream.IntStream
 
-@Disabled
+//@Disabled
 // 외부api의 데이터를 확인할려고 하는 것이니 실제 테스트와 관련 없습니다.
 class ApiCall {
 
-    fun objectMapper(): ObjectMapper {
-        return ObjectMapperConfig().objectMapper()
-    }
+    private fun objectMapper(): ObjectMapper = ObjectMapperConfig().objectMapper()
+
 //    @Test
 //    fun apiCall(){
 //
@@ -43,7 +42,7 @@ class ApiCall {
 
     @Test
     fun apiCalladress(){
-        var address : String = "논현로159길 18"
+        val address : String = "논현로159길 18"
 
         val request = HttpRequest(
             url = "https://dapi.kakao.com/v2/local/search/address.json"
@@ -55,6 +54,7 @@ class ApiCall {
         val http = HttpUtilImpl()
         val response = http.get(request)
 
+        println(response)
         assertThat(response.code,`is`(HttpStatus.OK.value()))
 
     }

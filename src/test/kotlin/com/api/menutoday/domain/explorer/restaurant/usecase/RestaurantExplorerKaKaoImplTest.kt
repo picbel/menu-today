@@ -1,6 +1,7 @@
 package com.api.menutoday.domain.explorer.restaurant.usecase
 
 import com.api.menutoday.common.util.http.HttpUtil
+import com.api.menutoday.common.util.http.HttpUtilImpl
 import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.explorer.restaurant.fixture.HttpUtilImplWithRestaurantResolver
 import com.api.menutoday.domain.explorer.restaurant.aggregate.Address
@@ -26,8 +27,8 @@ class RestaurantExplorerKaKaoImplTest{
 
     private fun companyOffice(): Address {
         return Address(
-            x = "37.514322572335935",
-            y = "127.06283102249932",
+            x = "127.026612890604",
+            y = "37.5231498089109",
             addressName = "설로인 압구정 사무실"
         )
     }

@@ -57,7 +57,7 @@ class RestaurantExplorerKaKaoImpl(
             .addHeader("Authorization", "KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
             .addParam("x", address.x)
             .addParam("y", address.y)
-            .addParam("radius", 500)
+            .addParam("radius", 350)
             .addParam("category_group_code", "FD6")
     }
 
