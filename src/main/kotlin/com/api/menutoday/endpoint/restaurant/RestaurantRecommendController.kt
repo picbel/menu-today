@@ -1,13 +1,13 @@
-package com.api.menutoday.endpoint
+package com.api.menutoday.endpoint.restaurant
 
-import com.api.menutoday.domain.explorer.restaurant.usecase.RestaurantExplorer
+import com.api.menutoday.domain.restaurant.usecase.RestaurantFinderUseCase
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/restaurant")
-class MenuTodayController(
-    private val explorer: RestaurantExplorer
+class RestaurantRecommendController(
+    private val finder: RestaurantFinderUseCase
 ) {
 //    @GetMapping("")
 //    fun getRestaurant(

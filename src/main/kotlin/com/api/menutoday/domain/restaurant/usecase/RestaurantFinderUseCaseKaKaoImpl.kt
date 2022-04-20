@@ -1,10 +1,10 @@
-package com.api.menutoday.domain.explorer.restaurant.usecase
+package com.api.menutoday.domain.restaurant.usecase
 
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse.Companion.bodyMap
-import com.api.menutoday.domain.explorer.restaurant.aggregate.Address
-import com.api.menutoday.domain.explorer.restaurant.aggregate.Restaurant
+import com.api.menutoday.domain.restaurant.aggregate.Address
+import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 import java.util.stream.IntStream
@@ -15,10 +15,10 @@ import java.util.stream.IntStream
     https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category
  */
 @Service
-class RestaurantExplorerKaKaoImpl(
+class RestaurantFinderUseCaseKaKaoImpl(
     private val httpclient: HttpUtil,
     private val objectMapper: ObjectMapper
-) : RestaurantExplorer {
+) : RestaurantFinderUseCase {
 
     override fun searchRestaurant(
         address: Address

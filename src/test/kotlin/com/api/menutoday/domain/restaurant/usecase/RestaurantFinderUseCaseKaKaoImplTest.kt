@@ -1,11 +1,10 @@
-package com.api.menutoday.domain.explorer.restaurant.usecase
+package com.api.menutoday.domain.restaurant.usecase
 
 import com.api.menutoday.common.util.http.HttpUtil
-import com.api.menutoday.common.util.http.HttpUtilImpl
 import com.api.menutoday.config.ObjectMapperConfig
-import com.api.menutoday.domain.explorer.restaurant.fixture.HttpUtilImplWithRestaurantResolver
-import com.api.menutoday.domain.explorer.restaurant.aggregate.Address
-import com.api.menutoday.domain.explorer.restaurant.aggregate.Restaurant
+import com.api.menutoday.domain.restaurant.fixture.HttpUtilImplWithRestaurantResolver
+import com.api.menutoday.domain.restaurant.aggregate.Address
+import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -14,15 +13,15 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(HttpUtilImplWithRestaurantResolver::class)
-class RestaurantExplorerKaKaoImplTest{
+class RestaurantFinderUseCaseKaKaoImplTest{
 
-    private lateinit var sut : RestaurantExplorerKaKaoImpl
+    private lateinit var sut : RestaurantFinderUseCaseKaKaoImpl
 
     private val categoryCode = "FD6"
 
     @BeforeEach
     fun setUp(httpUtil : HttpUtil){
-        sut = RestaurantExplorerKaKaoImpl(httpUtil, ObjectMapperConfig().objectMapper())
+        sut = RestaurantFinderUseCaseKaKaoImpl(httpUtil, ObjectMapperConfig().objectMapper())
     }
 
     private fun companyOffice(): Address {

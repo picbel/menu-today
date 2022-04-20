@@ -1,9 +1,9 @@
-package com.api.menutoday.domain.explorer.restaurant.usecase
+package com.api.menutoday.domain.restaurant.usecase
 
-import com.api.menutoday.domain.explorer.restaurant.aggregate.Address
-import com.api.menutoday.domain.explorer.restaurant.aggregate.Restaurant
+import com.api.menutoday.domain.restaurant.aggregate.Address
+import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 
-interface RestaurantExplorer {
+interface RestaurantFinderUseCase {
     fun searchRestaurant(
         address : Address
     ): List<Restaurant>

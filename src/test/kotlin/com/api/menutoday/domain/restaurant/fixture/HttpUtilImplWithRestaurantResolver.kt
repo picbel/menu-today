@@ -1,4 +1,4 @@
-package com.api.menutoday.domain.explorer.restaurant.fixture
+package com.api.menutoday.domain.restaurant.fixture
 
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.common.util.http.model.HttpRequest

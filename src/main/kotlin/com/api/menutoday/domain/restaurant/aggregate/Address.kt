@@ -1,6 +1,6 @@
-package com.api.menutoday.domain.explorer.restaurant.aggregate
+package com.api.menutoday.domain.restaurant.aggregate
 
-data class Address(
+class Address(
     val addressName: String,
     val x: String,
     val y: String,
