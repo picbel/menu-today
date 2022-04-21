@@ -7,14 +7,13 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-//@RequestMapping(
-//    produces = [MediaType.APPLICATION_JSON_VALUE],
-//    consumes = [MediaType.APPLICATION_JSON_VALUE]
-//)
+@RequestMapping(
+    produces = [MediaType.APPLICATION_JSON_VALUE],
+    consumes = [MediaType.APPLICATION_JSON_VALUE]
+)
 class RestaurantRecommendController(
     private val finder: RestaurantFinderUseCase
 ) {
@@ -22,11 +21,22 @@ class RestaurantRecommendController(
     fun recommendRestaurant(
         @ModelAttribute request : RestaurantRecommendRequest
     ): ResponseEntity<*> {
-
         return ResponseEntity.ok(
             when(request.menu){
-                null -> finder.recommendRestaurant(request.address.address)
-                else -> finder.recommendRestaurant(request.address.address, request.menu)
+                null -> finder.recommendRestaurant(request.getAddress())
+                else -> finder.recommendRestaurant(request.getAddress(), request.menu)
+            }
+        )
+    }
+
+    @GetMapping(ApiPaths.RANDOM)
+    fun randomRestaurant(
+        @ModelAttribute request : RestaurantRecommendRequest
+    ): ResponseEntity<*> {
+        return ResponseEntity.ok(
+            when(request.menu){
+                null -> finder.randomRestaurant(request.getAddress())
+                else -> finder.randomRestaurant(request.getAddress(), request.menu)
             }
         )
     }

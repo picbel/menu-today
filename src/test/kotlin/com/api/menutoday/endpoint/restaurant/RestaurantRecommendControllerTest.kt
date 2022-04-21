@@ -1,7 +1,6 @@
 package com.api.menutoday.endpoint.restaurant
 
 import com.api.menutoday.MenuTodayApplication
-import com.apple.eawt.Application
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

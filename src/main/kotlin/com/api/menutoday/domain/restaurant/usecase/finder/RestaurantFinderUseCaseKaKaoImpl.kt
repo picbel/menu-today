@@ -65,7 +65,7 @@ class RestaurantFinderUseCaseKaKaoImpl(
         body: KakaoResponse,
         request: HttpRequest
     ): MutableList<Restaurant> {
-        val restaurants = body.documents.toMutableList()
+        val restaurants = body.documents.toMutableSet()
 
         restaurants.addAll(IntStream.range(2, body.meta.pageableCount)
             .mapToObj {
@@ -77,10 +77,10 @@ class RestaurantFinderUseCaseKaKaoImpl(
             }
             .toList()
             .flatten()
-            .toMutableList()
+            .toMutableSet()
         )
 
-        return restaurants
+        return restaurants.toMutableList()
     }
 
     private fun getRestaurant(address: Address): List<Restaurant> {

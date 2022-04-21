@@ -1,0 +1,19 @@
+###
+GET http://localhost:8080/restaurant/recommend?address=APQUJUNG_OFFICE
+Content-Type: application/json
+Accept: application/json
+
+###
+GET http://localhost:8080/restaurant/recommend?address=APQUJUNG_OFFICE&menu=돈가스
+Content-Type: application/json
+Accept: application/json
+
+###
+GET http://localhost:8080/restaurant/random?address=APQUJUNG_OFFICE
+Content-Type: application/json
+Accept: application/json
+
+###
+GET http://localhost:8080/restaurant/random?address=APQUJUNG_OFFICE&menu=돈가스
+Content-Type: application/json
+Accept: application/json
