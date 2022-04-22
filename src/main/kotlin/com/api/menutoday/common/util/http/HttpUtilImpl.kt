@@ -2,6 +2,8 @@ package com.api.menutoday.common.util.http
 
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import java.io.BufferedReader
@@ -13,6 +15,8 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.nio.charset.StandardCharsets
 
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Service
 internal class HttpUtilImpl(
 ) : HttpUtil{
 
