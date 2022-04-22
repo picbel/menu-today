@@ -23,35 +23,40 @@ class RestaurantFinderUseCaseKaKaoImpl(
     override fun searchRestaurant(
         address: Address
     ): List<Restaurant> {
-        return getRestaurant(address)
+        return getRestaurantCallApi(address)
     }
 
     override fun recommendRestaurant(
         address : Address
     ): List<Restaurant> {
-        return randomPickFive(getRestaurant(address))
+        return randomPickFive(getRestaurantCallApi(address))
     }
 
     override fun recommendRestaurant(
         address: Address,
         menu: String
     ): List<Restaurant> {
-        return randomPickFive(getRestaurantByMenu(address, menu))
+        return randomPickFive(getRestaurantByMenuCallApi(address, menu))
     }
 
     override fun randomRestaurant(
         address: Address
     ): Restaurant {
-        return randomPickOne(getRestaurant(address))
+        return randomPickOne(getRestaurantCallApi(address))
     }
 
     override fun randomRestaurant(
         address: Address,
         menu: String
     ): Restaurant {
-        return randomPickOne(getRestaurantByMenu(address, menu))
+        return randomPickOne(getRestaurantByMenuCallApi(address, menu))
     }
 
+    /*
+        현재 음식점 말고는 다른 검색을 허용할 생각이 없어 카테고리 그룹코드를 고정시켯다.
+        radius값은 반경검색 거리 단위는 M이다
+        현재는 350M을 걷는 거리로 생각하고 있다.
+     */
     private fun kakaoSearchRequest(address: Address, url : String): HttpRequest {
         return HttpRequest(url = url)
             .addHeader("Authorization", "KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
@@ -65,40 +70,38 @@ class RestaurantFinderUseCaseKaKaoImpl(
         body: KakaoResponse,
         request: HttpRequest
     ): MutableList<Restaurant> {
-        val restaurants = body.documents.toMutableSet()
-
-        restaurants.addAll(IntStream.range(2, body.meta.pageableCount)
-            .mapToObj {
-                objectMapper.bodyMap<KakaoResponse>(
-                    httpclient.get(
-                        request.copy().addParam("page", it)
-                    ).body
-                ).documents
-            }
-            .toList()
-            .flatten()
-            .toMutableSet()
-        )
-
-        return restaurants.toMutableList()
+        return  body.documents.toMutableSet().apply {
+            this.addAll(IntStream.range(2, body.meta.pageableCount)
+                .mapToObj {
+                    objectMapper.bodyMap<KakaoResponse>(
+                        httpclient.get(
+                            request.copy().addParam("page", it)
+                        ).body
+                    ).documents
+                }
+                .toList()
+                .flatten()
+                .toMutableSet()
+            )  }.toMutableList()
     }
 
-    private fun getRestaurant(address: Address): List<Restaurant> {
+    private fun getRestaurantCallApi(address: Address): List<Restaurant> {
         val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/category.json")
 
-        val response = httpclient.get(request)
-        val body = objectMapper.bodyMap<KakaoResponse>(response.body)
-
-        return if (body.meta.isEnd) body.documents else callApiToTheEnd(body, request)
+        return apiCall(request)
     }
 
-    private fun getRestaurantByMenu(
+    private fun getRestaurantByMenuCallApi(
         address: Address,
         menu: String
     ): List<Restaurant> {
         val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/keyword.json")
             .addParam("query", menu, Charsets.UTF_8)
 
+        return apiCall(request)
+    }
+
+    private fun apiCall(request: HttpRequest): List<Restaurant> {
         val response = httpclient.get(request)
         val body = objectMapper.bodyMap<KakaoResponse>(response.body)
 
