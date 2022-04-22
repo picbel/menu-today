@@ -1,5 +1,6 @@
 package com.api.menutoday.domain.restaurant.usecase.finder
 
+import com.api.menutoday.common.util.address.AddressCode
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.restaurant.fixture.HttpUtilImplWithRestaurantResolver
@@ -26,11 +27,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     }
 
     private fun companyOffice(): Address {
-        return Address(
-            x = "127.026612890604",
-            y = "37.5231498089109",
-            addressName = "설로인 압구정 사무실"
-        )
+        return AddressCode.APQUJUNG_OFFICE.address
     }
 
     @Test
