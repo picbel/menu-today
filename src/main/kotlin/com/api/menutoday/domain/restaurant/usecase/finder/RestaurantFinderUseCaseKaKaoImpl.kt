@@ -52,6 +52,22 @@ class RestaurantFinderUseCaseKaKaoImpl(
         return randomPickOne(getRestaurantByMenuCallApi(address, menu))
     }
 
+    private fun getRestaurantCallApi(address: Address): List<Restaurant> {
+        return apiCall(
+            kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/category.json")
+        )
+    }
+
+    private fun getRestaurantByMenuCallApi(
+        address: Address,
+        menu: String
+    ): List<Restaurant> {
+        return apiCall(
+            kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/keyword.json")
+                .addParam("query", menu, Charsets.UTF_8)
+        )
+    }
+
     /*
         현재 음식점 말고는 다른 검색을 허용할 생각이 없어 카테고리 그룹코드를 고정시켯다.
         radius값은 반경검색 거리 단위는 M이다
@@ -64,6 +80,13 @@ class RestaurantFinderUseCaseKaKaoImpl(
             .addParam("y", address.y)
             .addParam("radius", 350)
             .addParam("category_group_code", "FD6")
+    }
+
+    private fun apiCall(request: HttpRequest): List<Restaurant> {
+        val response = httpclient.get(request)
+        val body = objectMapper.bodyMap<KakaoResponse>(response.body)
+
+        return if (body.meta.isEnd) body.documents else callApiToTheEnd(body, request)
     }
 
     private fun callApiToTheEnd(
@@ -82,30 +105,8 @@ class RestaurantFinderUseCaseKaKaoImpl(
                 .toList()
                 .flatten()
                 .toMutableSet()
-            )  }.toMutableList()
-    }
-
-    private fun getRestaurantCallApi(address: Address): List<Restaurant> {
-        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/category.json")
-
-        return apiCall(request)
-    }
-
-    private fun getRestaurantByMenuCallApi(
-        address: Address,
-        menu: String
-    ): List<Restaurant> {
-        val request = kakaoSearchRequest(address, "https://dapi.kakao.com/v2/local/search/keyword.json")
-            .addParam("query", menu, Charsets.UTF_8)
-
-        return apiCall(request)
-    }
-
-    private fun apiCall(request: HttpRequest): List<Restaurant> {
-        val response = httpclient.get(request)
-        val body = objectMapper.bodyMap<KakaoResponse>(response.body)
-
-        return if (body.meta.isEnd) body.documents else callApiToTheEnd(body, request)
+            )  }
+            .toMutableList()
     }
 
     internal data class KakaoResponse(
