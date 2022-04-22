@@ -15,7 +15,7 @@ import java.util.stream.IntStream
     https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category
  */
 @Service
-class RestaurantFinderUseCaseKaKaoImpl(
+internal class RestaurantFinderUseCaseKaKaoImpl(
     private val httpclient: HttpUtil,
     private val objectMapper: ObjectMapper
 ) : RestaurantFinderUseCase {
