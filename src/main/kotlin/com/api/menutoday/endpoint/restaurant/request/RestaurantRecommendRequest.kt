@@ -15,7 +15,7 @@ data class RestaurantRecommendRequest(
         try{
             return AddressCode.valueOf(this.address).address
         }catch (e : Exception){
-            throw IllegalArgumentException("입력하신 주소를 확인하여주세요. 혹은 현재 지원하지 않는 주소입니다.")
+            throw IllegalArgumentException("입력하신 장소 코드를 확인하여주세요. 혹은 현재 지원하지 않는 주소입니다.")
         }
     }
 }
