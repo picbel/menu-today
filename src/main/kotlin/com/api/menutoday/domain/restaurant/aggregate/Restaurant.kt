@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
     }
 */
 open class Restaurant(
+    open val id : Long,
     open val addressName: String,
     open val categoryGroupCode: String,
     open val categoryGroupName: String,
