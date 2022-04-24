@@ -1,5 +1,6 @@
 package com.api.menutoday.domain.restaurant.aggregate
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /*
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
     }
 */
 open class Restaurant(
+    @JsonIgnore
     open val id : Long,
     open val addressName: String,
     open val categoryGroupCode: String,
