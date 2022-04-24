@@ -19,8 +19,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
     }
 */
 open class Restaurant(
-    @JsonIgnore
-    open val id : Long,
     open val addressName: String,
     open val categoryGroupCode: String,
     open val categoryGroupName: String,
@@ -33,8 +31,12 @@ open class Restaurant(
     open val placeUrl: String,
     open val roadAddressName: String,
     open val x: String,
-    open val y: String
+    open val y: String,
+    // 지금은 카카오만 있어서 그냥 박아놧다 추후에 api를 바꾼다면 하드코딩바꿔야함!
+    open val source: String = "kakao",
+    val info : RestaurantInfo?
 ){
+    //todo Restaurant의 hash 는 apiId와 source로 비교한다
     override fun toString(): String {
         return "Restaurant(addressName='$addressName', categoryGroupCode='$categoryGroupCode', categoryGroupName='$categoryGroupName', categoryName='$categoryName', distance='$distance', id='$apiId', phone='$phone', placeName='$placeName', placeUrl='$placeUrl', roadAddressName='$roadAddressName', x='$x', y='$y')"
     }
