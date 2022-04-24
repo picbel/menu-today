@@ -3,10 +3,9 @@ package com.api.menutoday.domain.restaurant.usecase.finder
 import com.api.menutoday.common.util.address.AddressCode
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.config.ObjectMapperConfig
-import com.api.menutoday.domain.restaurant.fixture.HttpUtilImplWithRestaurantResolver
+import com.api.menutoday.domain.restaurant.fixture.RestaurantHttpUtilImplResolver
 import com.api.menutoday.domain.restaurant.aggregate.Address
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
-import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(HttpUtilImplWithRestaurantResolver::class)
+@ExtendWith(RestaurantHttpUtilImplResolver::class)
 class RestaurantFinderUseCaseKaKaoImplTest{
 
     private lateinit var sut : RestaurantFinderUseCaseKaKaoImpl
