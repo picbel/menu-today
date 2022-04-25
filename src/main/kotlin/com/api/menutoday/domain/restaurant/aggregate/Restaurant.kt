@@ -1,6 +1,5 @@
 package com.api.menutoday.domain.restaurant.aggregate
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /*
@@ -20,22 +19,22 @@ import com.fasterxml.jackson.annotation.JsonProperty
 */
 // 애를 인터페이스로 바꿔본다.
 // 바꾸면서 해결해야할것들 오브젝트맵퍼에서 애를 자동으로 매치를 시켜 줄까...?
-open class Restaurant(
-    open val addressName: String,
-    open val categoryGroupCode: String,
-    open val categoryGroupName: String,
-    open val categoryName: String,
-    open val distance: String, // 좌표로부터의 거리
+class Restaurant(
     @JsonProperty("id")
-    open val apiId: String,
-    open val phone: String,
-    open val placeName: String,
-    open val placeUrl: String,
-    open val roadAddressName: String,
-    open val x: String,
-    open val y: String,
+    val apiId: String,
     // 지금은 카카오만 있어서 그냥 박아놧다 추후에 api를 바꾼다면 하드코딩바꿔야함!
-    open val source: String = "kakao",
+    val source: String = "kakao",
+    val addressName: String,
+    val categoryGroupCode: String,
+    val categoryGroupName: String,
+    val categoryName: String,
+    val distance: String, // 좌표로부터의 거리
+    val phone: String,
+    val placeName: String,
+    val placeUrl: String,
+    val roadAddressName: String,
+    val x: String,
+    val y: String,
     val info : RestaurantInfo?
 ){
     //todo Restaurant의 hash 는 apiId와 source로 비교한다

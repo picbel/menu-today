@@ -3,34 +3,37 @@ package com.api.menutoday.domain.restaurant.repository.entity
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.IdClass
 import javax.persistence.Table
 
 @Entity
+@IdClass(RestaurantEntityPk::class)
 @Table(name = "restaurant")
 class RestaurantEntity constructor(
-    // 지금 생각하는건 apiId를 기준으로 해야하나?
-    // Todo 그런데 상속을 받으면 기본생성자가 없어 jpa를 이용하지 못한다 그래서 어떻게 해야할지 고민중
-    // 여기서 도메인을 인터페이스로 바꿔보자!
+    /*
+        도메인 모델 상속은 포기
+        그냥 변환로직 잘만들자... 괜히 몇줄아낄려다 jpa 기능하고 충돌나서 뻘짓하는거보다 좋다
+        id 는 복합키로 구성하였다.
+     */
     @Id
-    val id : Long?,
+    val apiId: String,
+    @Id
+    val source: String,
     val addressName: String,
     val categoryGroupCode: String,
     val categoryGroupName: String,
     val categoryName: String,
     val distance: String,
-    val apiId: String,
     val phone: String,
     val placeName: String,
     val placeUrl: String,
     val roadAddressName: String,
     val x: String,
     val y: String,
-    val source: String
 ) {
     companion object{
         fun from(src: Restaurant): RestaurantEntity = with(src) {
             RestaurantEntity(
-                id = null,
                 addressName = addressName,
                 categoryGroupCode = categoryGroupCode,
                 categoryGroupName = categoryGroupName,
