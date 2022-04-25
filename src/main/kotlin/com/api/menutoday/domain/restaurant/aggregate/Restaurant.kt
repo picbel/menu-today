@@ -17,8 +17,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
     "y":"37.52560341079871"
     }
 */
-// 애를 인터페이스로 바꿔본다.
-// 바꾸면서 해결해야할것들 오브젝트맵퍼에서 애를 자동으로 매치를 시켜 줄까...?
 class Restaurant(
     @JsonProperty("id")
     val apiId: String,

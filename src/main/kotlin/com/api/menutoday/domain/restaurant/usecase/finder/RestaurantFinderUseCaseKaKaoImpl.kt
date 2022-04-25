@@ -94,7 +94,7 @@ internal class RestaurantFinderUseCaseKaKaoImpl(
         request: HttpRequest
     ): MutableList<Restaurant> {
         return  body.documents.toMutableSet().apply {
-            this.addAll(IntStream.range(2, body.meta.pageableCount)
+            this.addAll(IntStream.range(2,(body.meta.pageableCount+1))
                 .mapToObj {
                     objectMapper.bodyMap<KakaoResponse>(
                         httpclient.get(

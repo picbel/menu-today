@@ -37,8 +37,8 @@ class RestaurantFinderUseCaseKaKaoImplTest{
         //when
         val restaurants = sut.searchRestaurant(address)
 
-        //then
-        assertThat(restaurants.size, `is`(15))
+        //then : is_end가 false가 나올때까지 api를 호출한다.
+        assertThat(restaurants.size, `is`(30))
     }
 
 
@@ -50,8 +50,11 @@ class RestaurantFinderUseCaseKaKaoImplTest{
         //when
         val restaurants = sut.recommendRestaurant(address)
 
-        //then
-        assertThat(restaurants.size, `is`(5))
+        //then : 검색한 식당중 5개를 랜덤으로 추천한다. 추후 조건에 의한 랜덤추천으로 변경될수 있다.
+        assertAll({
+            assertThat(assertCode(restaurants), `is`(true))
+            assertThat(restaurants.size, `is`(5))
+        })
     }
 
     @Test
@@ -63,7 +66,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
         //when
         val restaurants = sut.recommendRestaurant(address,menu)
 
-        //then
+        //then : 검색한 식당중 5개를 랜덤으로 추천한다. 추후 조건에 의한 랜덤추천으로 변경될수 있다.
         assertAll({
             assertThat(assertCode(restaurants), `is`(true))
             assertThat(restaurants.size, `is`(5))
@@ -78,7 +81,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
         //when
         val restaurant = sut.randomRestaurant(address)
 
-        //then
+        //then : 검색한 식당중 한개를 랜덤으로 추천한다.
         assertThat(restaurant.categoryGroupCode, `is`(categoryCode))
     }
 
@@ -91,11 +94,8 @@ class RestaurantFinderUseCaseKaKaoImplTest{
         //when
         val restaurant = sut.randomRestaurant(address,menu)
 
-        //then
-        assertAll({
-            assertThat(restaurant.categoryGroupCode, `is`(categoryCode))
-        })
-
+        //then : 검색한 식당중 한개를 랜덤으로 추천한다.
+        assertThat(restaurant.categoryGroupCode, `is`(categoryCode))
     }
 
     private fun assertCode(restaurants :List<Restaurant>) : Boolean{
