@@ -10,6 +10,7 @@ import javax.persistence.Table
 class RestaurantEntity constructor(
     // 지금 생각하는건 apiId를 기준으로 해야하나?
     // Todo 그런데 상속을 받으면 기본생성자가 없어 jpa를 이용하지 못한다 그래서 어떻게 해야할지 고민중
+    // 여기서 도메인을 인터페이스로 바꿔보자!
     @Id
     val id : Long?,
     val addressName: String,
