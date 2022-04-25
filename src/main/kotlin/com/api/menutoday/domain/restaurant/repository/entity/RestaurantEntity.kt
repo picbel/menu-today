@@ -24,41 +24,26 @@ class RestaurantEntity constructor(
     val roadAddressName: String,
     val x: String,
     val y: String,
-    val source: String = "kakao"
-)
-//    : Restaurant(
-//    addressName = addressName,
-//    categoryGroupCode = categoryGroupCode,
-//    categoryGroupName = categoryGroupName,
-//    categoryName = categoryName,
-//    distance = distance,
-//    apiId = apiId,
-//    phone = phone,
-//    placeName = placeName,
-//    placeUrl = placeUrl,
-//    roadAddressName = roadAddressName,
-//    x = x,
-//    y = y
-//)
-{
-//    companion object{
-//        fun from(src: Restaurant): RestaurantEntity = with(src) {
-//            RestaurantEntity(
-//                id = (src as? RestaurantEntity)?.id,
-//                source = (src as? RestaurantEntity)!!.source,
-//                addressName = addressName,
-//                categoryGroupCode = categoryGroupCode,
-//                categoryGroupName = categoryGroupName,
-//                categoryName = categoryName,
-//                distance = distance,
-//                apiId = apiId,
-//                phone = phone,
-//                placeName = placeName,
-//                placeUrl = placeUrl,
-//                roadAddressName = roadAddressName,
-//                x = x,
-//                y = y
-//            )
-//        }
-//    }
+    val source: String
+) {
+    companion object{
+        fun from(src: Restaurant): RestaurantEntity = with(src) {
+            RestaurantEntity(
+                id = null,
+                addressName = addressName,
+                categoryGroupCode = categoryGroupCode,
+                categoryGroupName = categoryGroupName,
+                categoryName = categoryName,
+                distance = distance,
+                apiId = apiId,
+                phone = phone,
+                placeName = placeName,
+                placeUrl = placeUrl,
+                roadAddressName = roadAddressName,
+                x = x,
+                y = y,
+                source = source
+            )
+        }
+    }
 }
