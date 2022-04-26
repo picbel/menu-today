@@ -17,8 +17,8 @@ import java.nio.charset.StandardCharsets
 
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Service
-internal class HttpUtilImpl(
-) : HttpUtil{
+internal class HttpClientImpl(
+) : HttpClient{
 
     override fun get(request : HttpRequest): HttpResponse {
         val con : HttpURLConnection = connect(request.urlAssemble());

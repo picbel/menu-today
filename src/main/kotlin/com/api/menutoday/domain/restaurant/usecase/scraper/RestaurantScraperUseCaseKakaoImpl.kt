@@ -1,10 +1,11 @@
 package com.api.menutoday.domain.restaurant.usecase.scraper
 
+
 import com.api.menutoday.domain.restaurant.aggregate.Address
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
-import com.api.menutoday.domain.restaurant.aggregate.RestaurantInfo
 import com.api.menutoday.domain.restaurant.repository.RestaurantRepository
 import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCase
+
 
 class RestaurantScraperUseCaseKakaoImpl(
     private val restaurantFinder: RestaurantFinderUseCase,
@@ -13,7 +14,10 @@ class RestaurantScraperUseCaseKakaoImpl(
 
     override fun scrapRestaurant(address: Address) : List<Restaurant> {
 
-        val restaurants = restaurantFinder.searchRestaurant(address)
+        val first = restaurantFinder.searchRestaurant(address)
+            .first()
+//
+//       여기서 정보를 가져온다
 
 
 

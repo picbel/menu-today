@@ -4,7 +4,7 @@ import com.api.menutoday.common.util.address.AddressCode
 import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.restaurant.aggregate.Address
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
-import com.api.menutoday.domain.restaurant.mock.MockRestaurantHttpUtil
+import com.api.menutoday.domain.restaurant.mock.MockRestaurantHttpClient
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -19,7 +19,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
 
     @BeforeEach
     fun setUp(){
-        sut = RestaurantFinderUseCaseKaKaoImpl(MockRestaurantHttpUtil(), ObjectMapperConfig().objectMapper())
+        sut = RestaurantFinderUseCaseKaKaoImpl(MockRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
     }
 
     private fun companyOffice(): Address {

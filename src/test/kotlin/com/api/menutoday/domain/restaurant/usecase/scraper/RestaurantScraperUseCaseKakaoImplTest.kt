@@ -3,7 +3,7 @@ package com.api.menutoday.domain.restaurant.usecase.scraper
 import com.api.menutoday.common.util.address.AddressCode
 import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.restaurant.mock.MockRestaurantRepository
-import com.api.menutoday.domain.restaurant.mock.MockRestaurantHttpUtil
+import com.api.menutoday.domain.restaurant.mock.MockRestaurantHttpClient
 import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,7 +19,7 @@ internal class RestaurantScraperUseCaseKakaoImplTest{
     @BeforeEach
     fun setUp(){
         sut = RestaurantScraperUseCaseKakaoImpl(
-            RestaurantFinderUseCaseKaKaoImpl(MockRestaurantHttpUtil(), ObjectMapperConfig().objectMapper()),
+            RestaurantFinderUseCaseKaKaoImpl(MockRestaurantHttpClient(), ObjectMapperConfig().objectMapper()),
             MockRestaurantRepository()
         )
     }

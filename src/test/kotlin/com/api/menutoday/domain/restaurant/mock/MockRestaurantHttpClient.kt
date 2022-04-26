@@ -1,11 +1,11 @@
 package com.api.menutoday.domain.restaurant.mock
 
-import com.api.menutoday.common.util.http.HttpUtil
+import com.api.menutoday.common.util.http.HttpClient
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse
 import org.springframework.http.HttpMethod
 
-class MockRestaurantHttpUtil : HttpUtil{
+class MockRestaurantHttpClient : HttpClient{
     override fun get(request: HttpRequest): HttpResponse {
         if (request.url == "https://dapi.kakao.com/v2/local/search/keyword.json") {
             return HttpResponse(

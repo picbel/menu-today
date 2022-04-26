@@ -1,6 +1,6 @@
 package com.api.menutoday
 
-import com.api.menutoday.common.util.http.HttpUtilImpl
+import com.api.menutoday.common.util.http.HttpClientImpl
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse.Companion.bodyMap
 import com.api.menutoday.config.ObjectMapperConfig
@@ -8,6 +8,7 @@ import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCas
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
+import org.jsoup.nodes.Document
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
@@ -51,7 +52,7 @@ class ApiCall {
             .addParam("query", address, Charsets.UTF_8)
 
 
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
 
         println(response)
@@ -74,7 +75,7 @@ class ApiCall {
             .addParam("query", keyword, Charsets.UTF_8)
 
 
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
 
         assertThat(response.code,`is`(HttpStatus.OK.value()))
@@ -95,7 +96,7 @@ class ApiCall {
 
 
 
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
 
         assertThat(response.code,`is`(HttpStatus.OK.value()))
@@ -114,7 +115,7 @@ class ApiCall {
             .addParam("category_group_code", "FD6")
 
 
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
         val body = objectMapper().bodyMap<RestaurantFinderUseCaseKaKaoImpl.KakaoResponse>(response.body)
 

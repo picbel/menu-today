@@ -33,7 +33,6 @@ class Restaurant(
     val roadAddressName: String,
     val x: String,
     val y: String,
-    val info : RestaurantInfo?
 ){
     //todo Restaurant의 hash 는 apiId와 source로 비교한다
     override fun toString(): String {

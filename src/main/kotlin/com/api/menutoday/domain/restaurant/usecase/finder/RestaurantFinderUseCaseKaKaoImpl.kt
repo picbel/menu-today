@@ -1,6 +1,6 @@
 package com.api.menutoday.domain.restaurant.usecase.finder
 
-import com.api.menutoday.common.util.http.HttpUtil
+import com.api.menutoday.common.util.http.HttpClient
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse.Companion.bodyMap
 import com.api.menutoday.domain.restaurant.aggregate.Address
@@ -16,7 +16,7 @@ import java.util.stream.IntStream
  */
 @Service
 internal class RestaurantFinderUseCaseKaKaoImpl(
-    private val httpclient: HttpUtil,
+    private val httpclient: HttpClient,
     private val objectMapper: ObjectMapper
 ) : RestaurantFinderUseCase {
 
