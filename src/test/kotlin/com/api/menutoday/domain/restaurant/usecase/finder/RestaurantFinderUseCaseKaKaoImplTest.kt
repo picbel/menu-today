@@ -6,6 +6,7 @@ import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.restaurant.fixture.RestaurantHttpUtilImplResolver
 import com.api.menutoday.domain.restaurant.aggregate.Address
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
+import com.api.menutoday.domain.restaurant.fixture.TestRestaurantHttpUtil
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -13,7 +14,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(RestaurantHttpUtilImplResolver::class)
 class RestaurantFinderUseCaseKaKaoImplTest{
 
     private lateinit var sut : RestaurantFinderUseCaseKaKaoImpl
@@ -21,8 +21,8 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     private val categoryCode = "FD6"
 
     @BeforeEach
-    fun setUp(httpUtil : HttpUtil){
-        sut = RestaurantFinderUseCaseKaKaoImpl(httpUtil, ObjectMapperConfig().objectMapper())
+    fun setUp(){
+        sut = RestaurantFinderUseCaseKaKaoImpl(TestRestaurantHttpUtil(), ObjectMapperConfig().objectMapper())
     }
 
     private fun companyOffice(): Address {
