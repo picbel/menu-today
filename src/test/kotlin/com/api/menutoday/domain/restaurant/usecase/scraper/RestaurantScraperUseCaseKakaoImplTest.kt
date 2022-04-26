@@ -2,8 +2,8 @@ package com.api.menutoday.domain.restaurant.usecase.scraper
 
 import com.api.menutoday.common.util.address.AddressCode
 import com.api.menutoday.config.ObjectMapperConfig
-import com.api.menutoday.domain.restaurant.fixture.MockRestaurantRepository
-import com.api.menutoday.domain.restaurant.fixture.MockRestaurantHttpUtil
+import com.api.menutoday.domain.restaurant.mock.MockRestaurantRepository
+import com.api.menutoday.domain.restaurant.mock.MockRestaurantHttpUtil
 import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

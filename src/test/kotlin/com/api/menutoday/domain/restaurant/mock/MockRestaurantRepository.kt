@@ -1,4 +1,4 @@
-package com.api.menutoday.domain.restaurant.fixture
+package com.api.menutoday.domain.restaurant.mock
 
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 import com.api.menutoday.domain.restaurant.repository.RestaurantRepository

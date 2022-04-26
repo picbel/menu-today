@@ -1,4 +1,4 @@
-package com.api.menutoday.domain.restaurant.fixture
+package com.api.menutoday.domain.restaurant.mock
 
 import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.common.util.http.model.HttpRequest
