@@ -1,20 +1,13 @@
 package com.api.menutoday.domain.restaurant.usecase.scraper
 
 import com.api.menutoday.common.util.address.AddressCode
-import com.api.menutoday.common.util.http.HttpUtil
 import com.api.menutoday.config.ObjectMapperConfig
-import com.api.menutoday.domain.restaurant.fixture.RestaurantHttpUtilImplResolver
-import com.api.menutoday.domain.restaurant.fixture.RestaurantRepositoryResolver
-import com.api.menutoday.domain.restaurant.repository.RestaurantRepository
-import com.api.menutoday.domain.restaurant.repository.RestaurantRepositoryImpl
-import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCase
+import com.api.menutoday.domain.restaurant.fixture.MockRestaurantRepository
+import com.api.menutoday.domain.restaurant.fixture.MockRestaurantHttpUtil
 import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(RestaurantHttpUtilImplResolver::class, RestaurantRepositoryResolver::class)
 internal class RestaurantScraperUseCaseKakaoImplTest{
 
     /*
@@ -24,10 +17,10 @@ internal class RestaurantScraperUseCaseKakaoImplTest{
     private lateinit var sut : RestaurantScraperUseCase
 
     @BeforeEach
-    fun setUp(httpUtil : HttpUtil, restaurantRepository: RestaurantRepository){
+    fun setUp(){
         sut = RestaurantScraperUseCaseKakaoImpl(
-            RestaurantFinderUseCaseKaKaoImpl(httpUtil, ObjectMapperConfig().objectMapper()),
-            restaurantRepository
+            RestaurantFinderUseCaseKaKaoImpl(MockRestaurantHttpUtil(), ObjectMapperConfig().objectMapper()),
+            MockRestaurantRepository()
         )
     }
 

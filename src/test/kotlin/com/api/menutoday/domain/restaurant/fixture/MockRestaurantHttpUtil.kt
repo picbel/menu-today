@@ -5,7 +5,7 @@ import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse
 import org.springframework.http.HttpMethod
 
-class TestRestaurantHttpUtil : HttpUtil{
+class MockRestaurantHttpUtil : HttpUtil{
     override fun get(request: HttpRequest): HttpResponse {
         if (request.url == "https://dapi.kakao.com/v2/local/search/keyword.json") {
             return HttpResponse(
