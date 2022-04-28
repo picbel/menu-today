@@ -10,11 +10,6 @@ import javax.persistence.Table
 @IdClass(RestaurantEntityPk::class)
 @Table(name = "restaurant")
 class RestaurantEntity constructor(
-    /*
-        도메인 모델 상속은 포기
-        그냥 변환로직 잘만들자... 괜히 몇줄아낄려다 jpa 기능하고 충돌나서 뻘짓하는거보다 좋다
-        id 는 복합키로 구성하였다.
-     */
     @Id
     val apiId: String,
     @Id
