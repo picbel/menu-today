@@ -8,7 +8,6 @@ import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCas
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.jsoup.nodes.Document
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus

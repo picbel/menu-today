@@ -18,36 +18,35 @@ import java.nio.charset.StandardCharsets
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Service
 internal class HttpClientImpl(
-) : HttpClient{
+) : HttpClient {
 
-    override fun get(request : HttpRequest): HttpResponse {
-        val con : HttpURLConnection = connect(request.urlAssemble());
-        try {
-            con.requestMethod = "GET"
-            return call(con,request)
-        } catch (e : IOException) {
-            throw RuntimeException("API 요청과 응답 실패", e);
-        } finally {
-            con.disconnect();
+    override fun get(request: HttpRequest): HttpResponse {
+        connect(request.urlAssemble()).run {
+            try {
+                this.requestMethod = HttpMethod.GET.name
+                setHeader(this, request)
+                return call(this, request)
+            } catch (e: IOException) {
+                throw RuntimeException("API 요청과 응답 실패", e);
+            } finally {
+                this.disconnect();
+            }
         }
-
     }
 
     private fun setHeader(
         con: HttpURLConnection,
         request: HttpRequest
-    ) : HttpURLConnection{
-        for (header in request.requestHeaders.entries) {
-            con.setRequestProperty(header.key, header.value)
-        }
-        return con
+    ): HttpURLConnection {
+        return request.requestHeaders.entries.stream().forEach {
+            con.setRequestProperty(it.key, it.value)
+        }.let { con }
     }
 
     private fun call(
         con: HttpURLConnection,
-        request : HttpRequest
+        request: HttpRequest
     ): HttpResponse {
-        setHeader(con, request)
         if (con.responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
             return HttpResponse(
                 method = HttpMethod.valueOf(con.requestMethod),
@@ -67,28 +66,26 @@ internal class HttpClientImpl(
         }
     }
 
-    private fun connect(apiUrl : String) : HttpURLConnection {
+    private fun connect(apiUrl: String): HttpURLConnection {
         try {
-            val url = URL(apiUrl);
-            return url.openConnection() as HttpURLConnection
-        } catch (e : MalformedURLException) {
+            return URL(apiUrl).openConnection() as HttpURLConnection
+        } catch (e: MalformedURLException) {
             throw RuntimeException("API URL이 잘못되었습니다. : $apiUrl", e)
-        } catch (e : IOException) {
+        } catch (e: IOException) {
             throw RuntimeException("연결이 실패했습니다. : $apiUrl", e)
         }
     }
 
-    private fun readBody (body : InputStream) : String{
-        val streamReader = InputStreamReader(body, StandardCharsets.UTF_8);
-        try  {
-            val lineReader =  BufferedReader(streamReader)
-            val responseBody = StringBuilder()
-            lineReader.forEachLine {
-                responseBody.append(it)
+    private fun readBody(body: InputStream): String {
+        return InputStreamReader(body, StandardCharsets.UTF_8).use{
+            try {
+                BufferedReader(it).run {
+                    StringBuilder().append(it)
+                }.toString()
+            } catch (e: IOException) {
+                throw RuntimeException("API 응답을 읽는데 실패했습니다.", e)
             }
-            return responseBody.toString()
-        } catch (e : IOException) {
-            throw RuntimeException("API 응답을 읽는데 실패했습니다.", e)
         }
     }
+
 }
