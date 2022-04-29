@@ -20,7 +20,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     private val keywordRestaurantFinderUseCase : RestaurantFinderUseCaseKaKaoImpl =
         RestaurantFinderUseCaseKaKaoImpl(MockKeywordRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
 
-    private val categoryRestaurantHttpclient : RestaurantFinderUseCaseKaKaoImpl =
+    private val categoryRestaurantFinderUseCase : RestaurantFinderUseCaseKaKaoImpl =
         RestaurantFinderUseCaseKaKaoImpl(MockCategoryRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
 
 
@@ -31,7 +31,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun searchRestaurant() {
         //given
-        sut = categoryRestaurantHttpclient
+        sut = categoryRestaurantFinderUseCase
         val address = companyOffice()
 
         //when
@@ -78,7 +78,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun randomRestaurant(){
         //given
-        sut = categoryRestaurantHttpclient
+        sut = categoryRestaurantFinderUseCase
         val address = companyOffice()
 
         //when
