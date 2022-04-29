@@ -4,10 +4,10 @@ import com.api.menutoday.common.util.address.AddressCode
 import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.restaurant.aggregate.Address
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
-import com.api.menutoday.domain.restaurant.mock.MockRestaurantHttpClient
+import com.api.menutoday.domain.restaurant.mock.MockCategoryRestaurantHttpClient
+import com.api.menutoday.domain.restaurant.mock.MockKeywordRestaurantHttpClient
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
@@ -17,10 +17,12 @@ class RestaurantFinderUseCaseKaKaoImplTest{
 
     private val categoryCode = "FD6"
 
-    @BeforeEach
-    fun setUp(){
-        sut = RestaurantFinderUseCaseKaKaoImpl(MockRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
-    }
+    private val keywordRestaurantFinderUseCase : RestaurantFinderUseCaseKaKaoImpl =
+        RestaurantFinderUseCaseKaKaoImpl(MockKeywordRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
+
+    private val categoryRestaurantHttpclient : RestaurantFinderUseCaseKaKaoImpl =
+        RestaurantFinderUseCaseKaKaoImpl(MockCategoryRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
+
 
     private fun companyOffice(): Address {
         return AddressCode.APQUJUNG_OFFICE.address
@@ -29,6 +31,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun searchRestaurant() {
         //given
+        sut = categoryRestaurantHttpclient
         val address = companyOffice()
 
         //when
@@ -42,6 +45,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun recommendRestaurant(){
         //given
+        sut = keywordRestaurantFinderUseCase
         val address = companyOffice()
 
         //when
@@ -57,6 +61,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun recommendRestaurantByMenu(){
         //given
+        sut = keywordRestaurantFinderUseCase
         val address = companyOffice()
         val menu = "치킨"
 
@@ -73,6 +78,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun randomRestaurant(){
         //given
+        sut = categoryRestaurantHttpclient
         val address = companyOffice()
 
         //when
@@ -85,6 +91,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun randomRestaurantByMenu(){
         //given
+        sut = keywordRestaurantFinderUseCase
         val address = companyOffice()
         val menu = "치킨"
 
