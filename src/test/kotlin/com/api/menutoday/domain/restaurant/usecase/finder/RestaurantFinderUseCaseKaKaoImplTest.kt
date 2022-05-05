@@ -17,10 +17,10 @@ class RestaurantFinderUseCaseKaKaoImplTest{
 
     private val categoryCode = "FD6"
 
-    private val keywordRestaurantFinderUseCase : RestaurantFinderUseCaseKaKaoImpl =
+    private fun keywordRestaurantFinderUseCase() : RestaurantFinderUseCaseKaKaoImpl =
         RestaurantFinderUseCaseKaKaoImpl(MockKeywordRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
 
-    private val categoryRestaurantFinderUseCase : RestaurantFinderUseCaseKaKaoImpl =
+    private fun categoryRestaurantFinderUseCase() : RestaurantFinderUseCaseKaKaoImpl =
         RestaurantFinderUseCaseKaKaoImpl(MockCategoryRestaurantHttpClient(), ObjectMapperConfig().objectMapper())
 
 
@@ -31,7 +31,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun searchRestaurant() {
         //given
-        sut = categoryRestaurantFinderUseCase
+        sut = categoryRestaurantFinderUseCase()
         val address = companyOffice()
 
         //when
@@ -45,7 +45,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun recommendRestaurant(){
         //given
-        sut = keywordRestaurantFinderUseCase
+        sut = keywordRestaurantFinderUseCase()
         val address = companyOffice()
 
         //when
@@ -61,7 +61,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun recommendRestaurantByMenu(){
         //given
-        sut = keywordRestaurantFinderUseCase
+        sut = keywordRestaurantFinderUseCase()
         val address = companyOffice()
         val menu = "치킨"
 
@@ -78,7 +78,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun randomRestaurant(){
         //given
-        sut = categoryRestaurantFinderUseCase
+        sut = categoryRestaurantFinderUseCase()
         val address = companyOffice()
 
         //when
@@ -91,7 +91,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
     @Test
     fun randomRestaurantByMenu(){
         //given
-        sut = keywordRestaurantFinderUseCase
+        sut = keywordRestaurantFinderUseCase()
         val address = companyOffice()
         val menu = "치킨"
 

@@ -85,6 +85,7 @@ class RestaurantFinderUseCaseKaKaoImpl(
     private fun apiCall(request: HttpRequest): List<Restaurant> {
         val response = httpclient.get(request)
         val body = objectMapper.bodyMap<KakaoResponse>(response.body)
+        println(body)
 
         return if (body.meta.isEnd) body.documents else callApiToTheEnd(body, request)
     }
