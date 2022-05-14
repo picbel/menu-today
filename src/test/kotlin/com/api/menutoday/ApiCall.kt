@@ -1,10 +1,10 @@
 package com.api.menutoday
 
-import com.api.menutoday.common.util.http.HttpUtilImpl
+import com.api.menutoday.common.util.http.HttpClientImpl
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse.Companion.bodyMap
 import com.api.menutoday.config.ObjectMapperConfig
-import com.api.menutoday.domain.explorer.restaurant.usecase.RestaurantExplorerKaKaoImpl
+import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -17,9 +17,8 @@ import java.util.stream.IntStream
 // 외부api의 데이터를 확인할려고 하는 것이니 실제 테스트와 관련 없습니다.
 class ApiCall {
 
-    fun objectMapper(): ObjectMapper {
-        return ObjectMapperConfig().objectMapper()
-    }
+    private fun objectMapper(): ObjectMapper = ObjectMapperConfig().objectMapper()
+
 //    @Test
 //    fun apiCall(){
 //
@@ -43,7 +42,7 @@ class ApiCall {
 
     @Test
     fun apiCalladress(){
-        var address : String = "논현로159길 18"
+        val address : String = "논현로159길 18"
 
         val request = HttpRequest(
             url = "https://dapi.kakao.com/v2/local/search/address.json"
@@ -52,9 +51,10 @@ class ApiCall {
             .addParam("query", address, Charsets.UTF_8)
 
 
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
 
+        println(response)
         assertThat(response.code,`is`(HttpStatus.OK.value()))
 
     }
@@ -74,7 +74,7 @@ class ApiCall {
             .addParam("query", keyword, Charsets.UTF_8)
 
 
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
 
         assertThat(response.code,`is`(HttpStatus.OK.value()))
@@ -95,7 +95,7 @@ class ApiCall {
 
 
 
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
 
         assertThat(response.code,`is`(HttpStatus.OK.value()))
@@ -114,15 +114,14 @@ class ApiCall {
             .addParam("category_group_code", "FD6")
 
 
-
-        val http = HttpUtilImpl()
+        val http = HttpClientImpl()
         val response = http.get(request)
-        val body = objectMapper().bodyMap<RestaurantExplorerKaKaoImpl.KakaoResponse>(response.body)
+        val body = objectMapper().bodyMap<RestaurantFinderUseCaseKaKaoImpl.KakaoResponse>(response.body)
 
         val result = body.documents.toMutableList()
             IntStream.range(2,body.meta.pageableCount)
                 .forEach {
-                    result.addAll(objectMapper().bodyMap<RestaurantExplorerKaKaoImpl.KakaoResponse>(http.get(request.copy().addParam("page", it)).body).documents)
+                    result.addAll(objectMapper().bodyMap<RestaurantFinderUseCaseKaKaoImpl.KakaoResponse>(http.get(request.copy().addParam("page", it)).body).documents)
                 }
 
         assertThat(result.size > 15, `is`(true))
