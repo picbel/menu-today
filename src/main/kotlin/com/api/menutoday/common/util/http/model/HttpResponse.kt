@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod
 
 class HttpResponse(
     val method: HttpMethod,
-    val message: String,
+    val message: String?,
     val code: Int,
     val body: String,
     val request: HttpRequest

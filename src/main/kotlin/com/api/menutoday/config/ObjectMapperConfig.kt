@@ -13,7 +13,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 @Configuration
 class ObjectMapperConfig {
 
-    @Bean("objectMapper")
+    @Bean("ObjectMapper")
     fun objectMapper(): ObjectMapper {
         return Jackson2ObjectMapperBuilder.json()
             .featuresToDisable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
