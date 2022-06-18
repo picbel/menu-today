@@ -7,7 +7,7 @@ class RestaurantRepositoryImpl(
     private val restaurantDao : RestaurantJpaDao
 ) : RestaurantRepository, RestaurantReadonlyRepository by restaurantReadonlyRepository{
 
-    override fun saveAll(restaurant: Restaurant) {
+    override fun save(restaurant: Restaurant): Restaurant {
         TODO("Not yet implemented")
     }
 

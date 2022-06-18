@@ -1,7 +1,9 @@
 package com.api.menutoday.domain.restaurant.repository.entity
 
 
+import com.api.menutoday.common.util.data.DateAuditing
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
+import java.time.Instant
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.IdClass
@@ -12,21 +14,23 @@ import javax.persistence.Table
 @Table(name = "restaurant")
 class RestaurantEntity constructor(
     @Id
-    val apiId: String,
+    override val apiId: String,
     @Id
-    val source: String,
-    val addressName: String,
-    val categoryGroupCode: String,
-    val categoryGroupName: String,
-    val categoryName: String,
-    val distance: String,
-    val phone: String,
-    val placeName: String,
-    val placeUrl: String,
-    val roadAddressName: String,
-    val x: String,
-    val y: String,
-) {
+    override val source: String,
+    override val addressName: String,
+    override val categoryGroupCode: String,
+    override val categoryGroupName: String,
+    override val categoryName: String,
+    override val distance: String,
+    override val phone: String,
+    override val placeName: String,
+    override val placeUrl: String,
+    override val roadAddressName: String,
+    override val x: String,
+    override val y: String,
+    override var createDate: Instant = Instant.now(),
+    override var updateDate: Instant? = null,
+) : Restaurant, DateAuditing {
     companion object{
         fun from(src: Restaurant): RestaurantEntity = with(src) {
             RestaurantEntity(

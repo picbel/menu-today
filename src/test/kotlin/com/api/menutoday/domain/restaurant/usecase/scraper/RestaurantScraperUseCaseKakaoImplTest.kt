@@ -6,8 +6,10 @@ import com.api.menutoday.domain.restaurant.mock.MockKeywordRestaurantHttpClient
 import com.api.menutoday.domain.restaurant.mock.MockRestaurantRepository
 import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled
 internal class RestaurantScraperUseCaseKakaoImplTest{
 
     /*

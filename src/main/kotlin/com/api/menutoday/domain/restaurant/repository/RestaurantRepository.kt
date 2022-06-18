@@ -4,6 +4,6 @@ import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 
 interface RestaurantRepository {
 
-    fun saveAll(restaurant: Restaurant)
+    fun save(restaurant: Restaurant) : Restaurant
 
 }
