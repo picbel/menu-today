@@ -16,6 +16,7 @@ class RestaurantScraperUseCaseKakaoImpl(
 
         val first = restaurantFinder.searchRestaurant(address)
             .first()
+        println(first)
 //       http로 낚아 채는게 방법인거같다...
 //       여기서 정보를 가져온다
 

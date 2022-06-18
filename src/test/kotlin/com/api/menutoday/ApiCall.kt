@@ -4,7 +4,7 @@ import com.api.menutoday.common.util.http.HttpClientImpl
 import com.api.menutoday.common.util.http.model.HttpRequest
 import com.api.menutoday.common.util.http.model.HttpResponse.Companion.bodyMap
 import com.api.menutoday.config.ObjectMapperConfig
-import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
+import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -116,16 +116,27 @@ class ApiCall {
 
         val http = HttpClientImpl()
         val response = http.get(request)
-        val body = objectMapper().bodyMap<RestaurantFinderUseCaseKaKaoImpl.KakaoResponse>(response.body)
+        val body = objectMapper().bodyMap<KakaoResponse>(response.body)
 
         val result = body.documents.toMutableList()
             IntStream.range(2,body.meta.pageableCount)
                 .forEach {
-                    result.addAll(objectMapper().bodyMap<RestaurantFinderUseCaseKaKaoImpl.KakaoResponse>(http.get(request.copy().addParam("page", it)).body).documents)
+                    result.addAll(objectMapper().bodyMap<KakaoResponse>(http.get(request.copy().addParam("page", it)).body).documents)
                 }
 
         assertThat(result.size > 15, `is`(true))
 
     }
 
+
+    private data class KakaoResponse(
+        val meta : KakaoMeta,
+        val documents : List<Restaurant.Model>
+    )
+
+    private data class KakaoMeta(
+        val isEnd :Boolean,
+        val pageableCount: Int,
+        val totalCount: Int
+    )
 }

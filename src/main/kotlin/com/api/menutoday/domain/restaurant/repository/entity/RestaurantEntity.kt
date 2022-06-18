@@ -1,5 +1,6 @@
 package com.api.menutoday.domain.restaurant.repository.entity
 
+
 import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 import javax.persistence.Entity
 import javax.persistence.Id

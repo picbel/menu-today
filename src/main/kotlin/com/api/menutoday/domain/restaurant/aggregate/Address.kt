@@ -1,9 +1,14 @@
 package com.api.menutoday.domain.restaurant.aggregate
 
-class Address(
-    val addressName: String,
-    val x: String,
-    val y: String,
+interface Address{
+    val addressName: String
+    val x: String
+    val y: String
+
+    class Model(
+        override val addressName: String,
+        override val x: String,
+        override val y: String,
 //    var bCode: String?,
 //    var hCode: String?,
 //    var mainAddressNo: String?,
@@ -13,6 +18,17 @@ class Address(
 //    var region3DepthHName: String?,
 //    var region3DepthName: String?,
 //    var subAddressNo: String?,
-){
+    ) : Address{
 
+    }
+
+    companion object{
+        fun create(
+            addressName: String,
+            x: String,
+            y: String
+        ) : Model = Model(
+            addressName, x, y
+        )
+    }
 }

@@ -110,12 +110,17 @@ class RestaurantFinderUseCaseKaKaoImpl(
             .toMutableList()
     }
 
-    internal data class KakaoResponse(
+    private data class KakaoResponse(
         val meta : KakaoMeta,
-        val documents : List<Restaurant>
+
+        /*
+            Restaurant 인터페이스로 만든 이유는 model이라는 세부구현을 숨기기 위함이지만 objcetMapper의 이용을 위해 해당 클래스에 노출함
+            대신 해당 클래스를 private로 두어 다른곳에서 사용이 불가능하게 하여 해당 모델의 접근을 제한하도록 함
+         */
+        val documents : List<Restaurant.Model>
     )
 
-    internal data class KakaoMeta(
+    private data class KakaoMeta(
         val isEnd :Boolean,
         val pageableCount: Int,
         val totalCount: Int
