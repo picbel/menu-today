@@ -29,27 +29,27 @@ class RestaurantFinderUseCaseKaKaoImpl(
     override fun recommendRestaurant(
         address : Address
     ): List<Restaurant> {
-        return randomPickFive(getRestaurantCallApi(address))
+        return getRestaurantCallApi(address).randomPickFive()
     }
 
     override fun recommendRestaurant(
         address: Address,
         menu: String
     ): List<Restaurant> {
-        return randomPickFive(getRestaurantByMenuCallApi(address, menu))
+        return getRestaurantByMenuCallApi(address, menu).randomPickFive()
     }
 
     override fun randomRestaurant(
         address: Address
     ): Restaurant {
-        return randomPickOne(getRestaurantCallApi(address))
+        return getRestaurantCallApi(address).randomPickOne()
     }
 
     override fun randomRestaurant(
         address: Address,
         menu: String
     ): Restaurant {
-        return randomPickOne(getRestaurantByMenuCallApi(address, menu))
+        return getRestaurantByMenuCallApi(address, menu).randomPickOne()
     }
 
     private fun getRestaurantCallApi(address: Address): List<Restaurant> {
@@ -125,4 +125,14 @@ class RestaurantFinderUseCaseKaKaoImpl(
         val pageableCount: Int,
         val totalCount: Int
     )
+
+    private fun List<Restaurant>.randomPickOne() : Restaurant = this.shuffled().first()
+
+    // todo 지금은 그냥 5개 랜덤추천인데 거리, 가격, 평점등으로 추후엔 줄수 있지 않을까...?
+    private fun List<Restaurant>.randomPickFive(): List<Restaurant>
+            = this
+        .shuffled()
+        .stream()
+        .limit(5)
+        .toList()
 }
