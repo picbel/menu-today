@@ -3,13 +3,13 @@ package com.api.menutoday.domain.restaurant.usecase.scraper
 import com.api.menutoday.common.util.address.AddressCode
 import com.api.menutoday.config.ObjectMapperConfig
 import com.api.menutoday.domain.restaurant.mock.MockKeywordRestaurantHttpClient
-import com.api.menutoday.domain.restaurant.mock.MockRestaurantRepository
+import com.api.menutoday.domain.restaurant.mock.RestaurantRepositoryFixture
 import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCaseKaKaoImpl
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-@Disabled
+
+//@Disabled
 internal class RestaurantScraperUseCaseKakaoImplTest{
 
     /*
@@ -22,9 +22,10 @@ internal class RestaurantScraperUseCaseKakaoImplTest{
     fun setUp(){
         sut = RestaurantScraperUseCaseKakaoImpl(
             RestaurantFinderUseCaseKaKaoImpl(MockKeywordRestaurantHttpClient(), ObjectMapperConfig().objectMapper()),
-            MockRestaurantRepository()
+            RestaurantRepositoryFixture()
         )
     }
+
 
     /*
         레스토랑 정보를 긁어와서 저장하는 메서드

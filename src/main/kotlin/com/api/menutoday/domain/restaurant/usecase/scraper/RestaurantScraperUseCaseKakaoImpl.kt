@@ -7,7 +7,7 @@ import com.api.menutoday.domain.restaurant.repository.RestaurantRepository
 import com.api.menutoday.domain.restaurant.usecase.finder.RestaurantFinderUseCase
 
 
-class RestaurantScraperUseCaseKakaoImpl(
+internal class RestaurantScraperUseCaseKakaoImpl(
     private val restaurantFinder: RestaurantFinderUseCase,
     private val repository: RestaurantRepository
 ) : RestaurantScraperUseCase {

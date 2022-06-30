@@ -15,7 +15,7 @@ import java.util.stream.IntStream
     https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category
  */
 @Service
-class RestaurantFinderUseCaseKaKaoImpl(
+internal class RestaurantFinderUseCaseKaKaoImpl(
     private val httpclient: HttpClient,
     private val objectMapper: ObjectMapper
 ) : RestaurantFinderUseCase {
@@ -85,7 +85,6 @@ class RestaurantFinderUseCaseKaKaoImpl(
     private fun apiCall(request: HttpRequest): List<Restaurant> {
         val response = httpclient.get(request)
         val body = objectMapper.bodyMap<KakaoResponse>(response.body)
-        println(body)
 
         return if (body.meta.isEnd) body.documents else callApiToTheEnd(body, request)
     }
