@@ -8,16 +8,15 @@ import com.api.menutoday.domain.restaurant.aggregate.Restaurant
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 import java.util.stream.IntStream
 
-@Disabled
+//@Disabled
 // 외부api의 데이터를 확인할려고 하는 것이니 실제 테스트와 관련 없습니다.
 class ApiCall {
 
-    private fun objectMapper(): ObjectMapper = ObjectMapperConfig().objectMapper()
+    private val objectMapper: ObjectMapper = ObjectMapperConfig().objectMapper()
 
 //    @Test
 //    fun apiCall(){
@@ -76,7 +75,7 @@ class ApiCall {
 
         val http = HttpClientImpl()
         val response = http.get(request)
-
+        println(response.body)
         assertThat(response.code,`is`(HttpStatus.OK.value()))
 
     }
@@ -116,12 +115,12 @@ class ApiCall {
 
         val http = HttpClientImpl()
         val response = http.get(request)
-        val body = objectMapper().bodyMap<KakaoResponse>(response.body)
+        val body = objectMapper.bodyMap<KakaoResponse>(response.body)
 
         val result = body.documents.toMutableList()
             IntStream.range(2,body.meta.pageableCount)
                 .forEach {
-                    result.addAll(objectMapper().bodyMap<KakaoResponse>(http.get(request.copy().addParam("page", it)).body).documents)
+                    result.addAll(objectMapper.bodyMap<KakaoResponse>(http.get(request.copy().addParam("page", it)).body).documents)
                 }
 
         assertThat(result.size > 15, `is`(true))
