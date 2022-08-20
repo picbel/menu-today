@@ -33,7 +33,7 @@ internal class RestaurantScraperUseCaseKakaoImplTest{
     @Test
     fun scrapRestaurant(){
         //given
-        val address = AddressCode.APQUJUNG_OFFICE.address
+        val address = AddressCode.SPOT_ONE.address
 
         //when
         val scrapRestaurant = sut.scrapRestaurant(address)

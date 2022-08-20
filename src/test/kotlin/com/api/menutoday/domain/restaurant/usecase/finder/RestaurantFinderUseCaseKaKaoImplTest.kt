@@ -25,7 +25,7 @@ class RestaurantFinderUseCaseKaKaoImplTest{
 
 
     private fun companyOffice(): Address {
-        return AddressCode.APQUJUNG_OFFICE.address
+        return AddressCode.SPOT_ONE.address
     }
 
     @Test

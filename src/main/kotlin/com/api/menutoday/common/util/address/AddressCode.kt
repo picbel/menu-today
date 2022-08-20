@@ -5,11 +5,11 @@ import com.api.menutoday.domain.restaurant.aggregate.Address
 enum class AddressCode(
     val address: Address
 ) {
-    APQUJUNG_OFFICE(
+    SPOT_ONE(
         Address.create(
-            x = "127.026612890604",
-            y = "37.5231498089109",
-            addressName = "설로인 압구정 사무실"
+            x = "126.924981674031",
+            y = "37.4904954867064",
+            addressName = "테스트용"
         )
     )
 

@@ -41,7 +41,7 @@ class ApiCall {
 
     @Test
     fun apiCalladress(){
-        val address : String = "논현로159길 18"
+        val address : String = "관악구 봉천로 209"
 
         val request = HttpRequest(
             url = "https://dapi.kakao.com/v2/local/search/address.json"
@@ -66,8 +66,8 @@ class ApiCall {
             url = "https://dapi.kakao.com/v2/local/search/keyword.json"
         )
             .addHeader("Authorization","KakaoAK 494febc0331b78332c4b75a58bd2d8a5")
-            .addParam("y",37.5231498089109)
-            .addParam("x",127.026612890604)
+            .addParam("y",37.4904954867064)
+            .addParam("x",126.924981674031)
             .addParam("radius",500)
             .addParam("category_group_code","FD6")
             .addParam("query", keyword, Charsets.UTF_8)

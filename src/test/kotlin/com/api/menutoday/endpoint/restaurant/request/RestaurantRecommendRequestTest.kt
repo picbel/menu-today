@@ -5,8 +5,6 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
-
 internal class RestaurantRecommendRequestTest {
 
     @Test
@@ -18,6 +16,6 @@ internal class RestaurantRecommendRequestTest {
         val address = sut.getAddress()
 
         //then
-        assertThat(address,`is`(AddressCode.APQUJUNG_OFFICE.address))
+        assertThat(address,`is`(AddressCode.SPOT_ONE.address))
     }
 }
